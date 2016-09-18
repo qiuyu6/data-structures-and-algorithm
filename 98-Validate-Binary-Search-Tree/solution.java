@@ -9,12 +9,24 @@
  */
 public class Solution {
     public boolean isValidBST(TreeNode root) {
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-    
-    public boolean isValidBST(TreeNode root, long minValue, long maxValue){
-        if(root == null) return true;
-        if(root.val <= minValue || root.val >= maxValue) return false;
-        return isValidBST(root.left, minValue, root.val) && isValidBST(root.right, root.val, maxValue);
+       if(root == null) return true;
+       Stack<TreeNode> stack = new Stack<TreeNode>();
+       
+       TreeNode cur = root;
+       TreeNode p = null;
+       TreeNode pre = null;
+       while(cur != null || !stack.empty()){
+           while(cur != null){
+               stack.push(cur);
+               cur = cur.left;
+           }
+           p = stack.pop();
+           if(pre != null && pre.val >= p.val){
+               return false;
+           }
+           pre = p;
+           cur = p.right;
+       }
+       return true;
     }
 }
