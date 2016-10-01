@@ -8,7 +8,7 @@ public class Solution {
             
             while(temp != 0){
                 if(temp%2 != 0) digit[k]++;
-                temp = temp >>> 1;
+                temp = temp>>>1;
                 k--;
             }
         }
